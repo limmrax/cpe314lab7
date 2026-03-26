@@ -3,11 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>Events</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .hover-box {
+            width: 200px;
+            height: 80px;
+            background: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #counter-display {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        #timer-text { color: #333; margin: 10px 0; }
+        section {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        h2 { margin-top: 0; }
+    </style>
 </head>
 <body>
-    <button id="btn">Click Me</button>
-    <input type="text" id="input" placeholder="Type here">
+
+    <!-- Reg No -->
+    <h1>22/EG/CO/1710</h1>
+
+    <!-- Original starter code -->
+    <section>
+        <h2>Starter Events</h2>
+        <button id="btn">Click Me</button>
+        <input type="text" id="input" placeholder="Type here (check console)">
+    </section>
+
+    <!-- Activity 1: Mouseover event -->
+    <section>
+        <h2>Mouseover Event</h2>
+        <div class="hover-box" id="hover-box">Hover over me!</div>
+    </section>
+
+    <!-- Activity 2: Counter -->
+    <section>
+        <h2>Counter</h2>
+        <div id="counter-display">0</div>
+        <button id="increment-btn">Increment</button>
+    </section>
+
+    <!-- Activity 3: Form validation -->
+    <section>
+        <h2>Form Validation</h2>
+        <form id="email-form">
+            <input type="text" id="email-input" placeholder="Enter your email">
+            <button type="submit">Submit</button>
+            <p id="validation-msg"></p>
+        </form>
+    </section>
+
+    <!-- Activity 4: Timer -->
+    <section>
+        <h2>Timer (setTimeout)</h2>
+        <p id="timer-text">This text will change after 5 seconds...</p>
+        <button id="start-timer-btn">Start Timer</button>
+    </section>
+
+    <!-- Activity 5: Prevent default -->
+    <section>
+        <h2>Prevent Default</h2>
+        <a href="https://google.com" id="prevented-link">Click me (navigation is blocked)</a>
+        <p id="link-msg"></p>
+    </section>
+
     <script>
+        // --- Starter code ---
         document.getElementById("btn").addEventListener("click", function() {
             alert("Button clicked!");
         });
@@ -15,6 +89,57 @@
         document.getElementById("input").addEventListener("keyup", function(event) {
             console.log("Key pressed: " + event.key);
         });
+
+        // --- Activity 1: Mouseover to change background ---
+        const hoverBox = document.getElementById("hover-box");
+        hoverBox.addEventListener("mouseover", function() {
+            hoverBox.style.backgroundColor = "#4CAF50";
+            hoverBox.style.color = "white";
+            hoverBox.textContent = "Background changed!";
+        });
+        hoverBox.addEventListener("mouseout", function() {
+            hoverBox.style.backgroundColor = "#ddd";
+            hoverBox.style.color = "black";
+            hoverBox.textContent = "Hover over me!";
+        });
+
+        // --- Activity 2: Counter ---
+        let count = 0;
+        document.getElementById("increment-btn").addEventListener("click", function() {
+            count++;
+            document.getElementById("counter-display").textContent = count;
+        });
+
+        // --- Activity 3: Form validation ---
+        document.getElementById("email-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const email = document.getElementById("email-input").value;
+            const msg = document.getElementById("validation-msg");
+            if (email.includes("@")) {
+                msg.textContent = "Valid email!";
+                msg.style.color = "green";
+            } else {
+                msg.textContent = "Invalid email. Must contain '@'.";
+                msg.style.color = "red";
+            }
+        });
+
+        // --- Activity 4: setTimeout to change text ---
+        document.getElementById("start-timer-btn").addEventListener("click", function() {
+            const timerText = document.getElementById("timer-text");
+            timerText.textContent = "Waiting 5 seconds...";
+            setTimeout(function() {
+                timerText.textContent = "Text changed after 5 seconds!";
+            }, 5000);
+        });
+
+        // --- Activity 5: Prevent default link navigation ---
+        document.getElementById("prevented-link").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("link-msg").textContent =
+                "Default navigation was prevented!";
+        });
     </script>
+
 </body>
 </html>
